@@ -16,13 +16,17 @@ game.PlayerEntity = me.Entity.extend ({
 	},
 
 	update: function(delta){
-		if(me.input.isKeyPressed("right")){
+		if(me.input.isKeyPressed("right")){ //checks if the right key is pressed
+			//adds to the position of the x by adding the velocity defined above in setVelocity() and multiplying
+			//it by me.timer.tick
+			//me.time.tick makes movement smooth
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
 		}else{
+
 			this.body.vel.x = 0;
 		}
 
-		this.body.update(delta);
+		this.body.update(delta); //delta is the change in time
 		return true;
 	}
 });
