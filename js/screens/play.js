@@ -6,10 +6,10 @@ game.PlayScreen = me.ScreenObject.extend({
 		// reset the score
 		game.data.score = 0;
 
-		me.levelDirector.loadLevel("level01");
-
-		// var player = me.pool("player", 0, 420, {});
-		// me.game.world.addChild(player, 5);
+		me.levelDirector.loadLevel("level01"); //loads the map
+ 
+		var player = me.pool.pull("player", 0, 420, {});//loads the player by pulling on an instance of it
+		me.game.world.addChild(player, 5); //5 is the layer number
 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
