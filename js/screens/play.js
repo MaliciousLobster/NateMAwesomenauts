@@ -12,6 +12,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.game.world.addChild(player, 5); //5 is the layer number
 
 		me.input.bindKey(me.input.KEY.RIGHT, "right"); //associates RIGHT with "right"
+		me.input.bindKey(me.input.KEY.LEFT, "left"); //associates LEFT with "left"
 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
