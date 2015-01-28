@@ -12,6 +12,7 @@ game.PlayerEntity = me.Entity.extend ({
 		}]);
 
 		this.body.setVelocity(5, 20); //moves five units right
+		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH); //makes it so the window always follows the character on BOTH axis
 
 		this.renderable.addAnimation("idle", [78]); //animation for when the character is not moving
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80); //walking animation for character using the OrcSpear sprite sheet
@@ -31,6 +32,7 @@ game.PlayerEntity = me.Entity.extend ({
 
 		else if(me.input.isKeyPressed("left")){
 			this.body.vel.x -= this.body.accel.x * me.timer.tick;
+			this.flipX(false); //flips the animation so that when the character goes left, the animation goes the same way
 		}
 
 		else{
@@ -52,7 +54,7 @@ game.PlayerEntity = me.Entity.extend ({
 });
 
 game.PlayerBaseEntity = me.Entity.extend({
-	init function(x, y, settings){
+	init: function(x, y, settings){
 		this._super(me.Entity, 'init', [x, y, {
 			image: "tower",
 			width: 100,
@@ -69,17 +71,27 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this); //makes it so other things can collide with it
 
 		this.type = "PlayerBaseEntity";
+
+
+		this.renderable.addAnimation("idle", [0]); //animation for when the character is not moving
+		this.renderable.addAnimation("broken", [1]);
+		this.renderable.setCurrentAnimation("idle"); //sets the default animation to "idle"
 	},
 
-	update:function(){
+	update:function(delta){
 		if(this.health <= 0){
 			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 
 		this._super(me.Entity, "update", [delta]);
 		return true;
+
 	},
+
+	
+
 
 	onCollision: function(){
 
@@ -87,7 +99,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 });
 
 game.EnemyBaseEntity = me.Entity.extend({
-	init function(x, y, settings){
+	init: function(x, y, settings){
 		this._super(me.Entity, 'init', [x, y, {
 			image: "tower",
 			width: 100,
@@ -104,17 +116,24 @@ game.EnemyBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this); //makes it so other things can collide with it
 
 		this.type = "PlayerBaseEntity";
+
+		this.renderable.addAnimation("idle", [0]); //animation for when the character is not moving
+		this.renderable.addAnimation("broken", [1]); //animation for when the character is not moving
+		this.renderable.setCurrentAnimation("idle"); //sets the default animation to "idle"
 	},
 
-	update:function(){
+	update:function(delta){
 		if(this.health <= 0){
 			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 
 		this._super(me.Entity, "update", [delta]);
 		return true;
 	},
+	
+
 
 	onCollision: function(){
 		
