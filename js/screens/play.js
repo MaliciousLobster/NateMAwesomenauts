@@ -11,8 +11,9 @@ game.PlayScreen = me.ScreenObject.extend({
 		var player = me.pool.pull("player", 0, 420, {});//loads the player by pulling on an instance of it
 		me.game.world.addChild(player, 5); //5 is the layer number
 
-		me.input.bindKey(me.input.KEY.RIGHT, "right"); //associates RIGHT with "right"
-		me.input.bindKey(me.input.KEY.LEFT, "left"); //associates LEFT with "left"
+		me.input.bindKey(me.input.KEY.D, "right"); //associates RIGHT with "right"
+		me.input.bindKey(me.input.KEY.A, "left"); //associates LEFT with "left"
+		me.input.bindKey(me.input.KEY.SPACE, "attack"); //associates MOUSE1 with "attack"
 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
