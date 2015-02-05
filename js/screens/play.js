@@ -14,6 +14,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.D, "right"); //associates RIGHT with "right"
 		me.input.bindKey(me.input.KEY.A, "left"); //associates LEFT with "left"
 		me.input.bindKey(me.input.KEY.SPACE, "attack"); //associates MOUSE1 with "attack"
+		me.input.bindKey(me.input.KEY.W, "jump"); //associates W with "jump"
 
 		// add our HUD to the game world
 		this.HUD = new game.HUD.Container();
