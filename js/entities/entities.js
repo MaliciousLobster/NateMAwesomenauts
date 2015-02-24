@@ -20,6 +20,8 @@ game.PlayerEntity = me.Entity.extend ({
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH); //makes it so the window always follows the character on BOTH axis
 
 		this.now = new Date().getTime();
+		this.dead = false;
+		this.attack = game.data.playerAttack;
 		this.lastHit = this.now;
 		this.lastAttack = new Date().getTime();
 		this.facing ="right"; //keeps track of the direction of the character
@@ -128,6 +130,12 @@ game.PlayerEntity = me.Entity.extend ({
 				&& ((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right")
 				)){ //if I'm attacking, and I attacked one second ago, and my ydif is less than 40, and I'm facing right or left, it will attack
 				this.lastHit = this.now;
+				//if the creeps health is less than the attack, execute code
+				if(response.b.health <= game.data.playerAttack){
+					//adds one gold for killing a creep
+					game.data.gold += 1;
+				}
+
 				response.b.loseHealth(game.data.playerHealth);	
 			}
 		}
@@ -352,7 +360,7 @@ game.GameManager = Object.extend({
 	init: function(x, y, settings){
 		this.now = new Date().getTime();//a timer
 		this.lastCreep = new Date().getTime(); //keeps track of the last time a creep happened
-
+		this.paused = false;
 		this.alwaysUpdate = true;
 	},
 
@@ -363,6 +371,11 @@ game.GameManager = Object.extend({
 			me.game.world.removeChild(game.data.player); //removes the player
 			me.state.current().resetPlayer(10, 0); //resets him
 		}
+
+		if(Math.round(this.now/1000)%20 ===0 && (this.now - this.lastCreep >= 1000)){
+			game.data.gold += 1;
+		}
+
 
 		if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
 			this.lastCreep = this.now;
