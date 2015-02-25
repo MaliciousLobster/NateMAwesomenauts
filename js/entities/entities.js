@@ -1,5 +1,20 @@
 game.PlayerEntity = me.Entity.extend ({
 	init: function(x, y, settings){
+		this.setSuper();
+		this.setPlayerTimers();
+		this.setAttributes();
+		this.setFlags();
+		
+		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH); //makes it so the window always follows the character on BOTH axis
+
+		this.addAnimation();
+
+		this.type = "PlayerEntity";
+		
+		this.renderable.setCurrentAnimation("idle"); //sets the default animation to "idle"
+	},
+
+	setSuper:function(){
 		this._super(me.Entity, 'init', [x, y, {
 			image: "player",
 			width: 64, //size put aside for the character
@@ -10,29 +25,30 @@ game.PlayerEntity = me.Entity.extend ({
 				return(new me.Rect(0, 0, 64, 50)).toPolygon();	//pretty much the hitbox of the character	
 			}
 		}]);
+	},
 
-
-		this.type = "PlayerEntity";
-
-		this.health = game.data.playerHealth;
-
-		this.body.setVelocity(game.data.playerMoveSpeed, 14); //moves five units right
-		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH); //makes it so the window always follows the character on BOTH axis
-
-		this.now = new Date().getTime();
-		this.dead = false;
-		this.attack = game.data.playerAttack;
-		this.lastHit = this.now;
+	setPlayerTimers: function(){
 		this.lastAttack = new Date().getTime();
-		this.facing ="right"; //keeps track of the direction of the character
+		this.now = new Date().getTime();
+		this.lastHit = this.now;
+	},
 
+	setAttributes: function(){
+		this.health = game.data.playerHealth;
+		this.body.setVelocity(game.data.playerMoveSpeed, 14); //moves five units right
+		this.attack = game.data.playerAttack;
+	},
+
+	setFlags: function(){
+		this.dead = false;
+		this.facing ="right"; //keeps track of the direction of the character
+	},
+
+	addAnimation: function(){
 		this.renderable.addAnimation("idle", [78]); //animation for when the character is not moving
 		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72]);
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80); //walking animation for character using the OrcSpear sprite sheet
-
-		this.renderable.setCurrentAnimation("idle"); //sets the default animation to "idle"
-
-	},
+	}
 
 	update: function(delta){
 		this.now = new Date().getTime(); //keeps track of the timer
