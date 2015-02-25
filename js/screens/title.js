@@ -23,6 +23,8 @@ game.TitleScreen = me.ScreenObject.extend({
 			if(action === "start"){
 				me.state.change(me.state.PLAY); //changes the game from Menu to Pay
 			}
+
+
 		});
 	},
 	
