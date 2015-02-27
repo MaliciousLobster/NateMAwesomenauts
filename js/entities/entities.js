@@ -45,8 +45,11 @@ game.PlayerEntity = me.Entity.extend ({
 		this.body.setVelocity(game.data.playerMoveSpeed, 14); //moves five units right
 	},
 
-	setFlags: function(){ this.dead = false; this.facing ="right";
-	//keeps track of the direction of the character },=
+	setFlags: function(){ 
+		this.dead = false; 
+		this.facing ="right";
+		//keeps track of the direction of the character
+	 },
 
 	update: function(delta){
 		this.now = new Date().getTime(); //keeps track of the timer
@@ -55,21 +58,7 @@ game.PlayerEntity = me.Entity.extend ({
 
 		this.checkKeyPressesAndMove();
 
-
-		if(me.input.isKeyPressed("attack") && !this.body.jumping && !this.body.falling){
-			if(!this.renderable.isCurrentAnimation("attack")){
-				this.renderable.setCurrentAnimation("attack", "idle"); //sets current animation to attack then reverts back to idle
-				this.renderable.setAnimationFrame(); //the next time this sequence starts, it begins form the first animtion and not from where it left off	
-			}
-		} 
-		else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
-			if(!this.renderable.isCurrentAnimation("walk")){
-				this.renderable.setCurrentAnimation("walk");
-			}
-		}
-		else if(!this.renderable.isCurrentAnimation("attack")){
-			this.renderable.setCurrentAnimation("idle"); //if the character isn't moving the character becomes idle
-		}
+		this.setAnimation();
 
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
 
@@ -98,6 +87,8 @@ game.PlayerEntity = me.Entity.extend ({
 		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){ //says that you can only jump if you're not already jumping or falling
 			this.jump();
 		}
+
+		this.attacking = me.input.isKeyPressed("attack") && !this.body.jumping && !this.body.falling && !isCurrentAnimation("walk");
 	},
 
 	moveRight: function(){
@@ -118,6 +109,23 @@ game.PlayerEntity = me.Entity.extend ({
 	jump: function(){
 		this.body.jumping = true;
 		this.body.vel.y -= this.body.accel.y * me.timer.tick;
+	},
+ 
+	setAnimation: function(){
+		if(this.attacking){
+			if(!this.renderable.isCurrentAnimation("attack")){
+				this.renderable.setCurrentAnimation("attack", "idle"); //sets current animation to attack then reverts back to idle
+				this.renderable.setAnimationFrame(); //the next time this sequence starts, it begins form the first animtion and not from where it left off	
+			}
+		} 
+		else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
+			if(!this.renderable.isCurrentAnimation("walk")){
+				this.renderable.setCurrentAnimation("walk");
+			}
+		}
+		else if(!this.renderable.isCurrentAnimation("attack")){
+			this.renderable.setCurrentAnimation("idle"); //if the character isn't moving the character becomes idle
+		}
 	},
 
 	collideHandler: function(response){
