@@ -1,27 +1,24 @@
 game.PlayerEntity = me.Entity.extend ({
 	init: function(x, y, settings){
-		this.setSuper();
+		this.setSuper(x, y);
 		this.setPlayerTimers();
 		this.setAttributes();
 		this.setFlags();
 		
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH); //makes it so the window always follows the character on BOTH axis
 
-		this.addAnimation();
+		this.setAnimation();
 
 
 		this.type = "PlayerEntity";
 		
 		this.attack = game.data.playerAttack;
-		this.renderable.addAnimation("idle", [78]); //animation for when the character is not moving
-		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72]);
-		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80); //walking animation for character using the OrcSpear sprite sheet
-
+		
 		this.renderable.setCurrentAnimation("idle"); //sets the default animation to "idle"
 
 	},
 
-	setSuper:function(){
+	setSuper:function(x, y){
 		this._super(me.Entity, 'init', [x, y, {
 			image: "player",
 			width: 64, //size put aside for the character
@@ -54,7 +51,7 @@ game.PlayerEntity = me.Entity.extend ({
 	update: function(delta){
 		this.now = new Date().getTime(); //keeps track of the timer
 
-		this.dead.checkIfDead();
+		this.dead = this.checkIfDead();
 
 		this.checkKeyPressesAndMove();
 
@@ -88,7 +85,7 @@ game.PlayerEntity = me.Entity.extend ({
 			this.jump();
 		}
 
-		this.attacking = me.input.isKeyPressed("attack") && !this.body.jumping && !this.body.falling && !isCurrentAnimation("walk");
+		this.attacking = me.input.isKeyPressed("attack") && !this.body.jumping && !this.body.falling;
 	},
 
 	moveRight: function(){
@@ -112,6 +109,10 @@ game.PlayerEntity = me.Entity.extend ({
 	},
  
 	setAnimation: function(){
+		this.renderable.addAnimation("idle", [78]); //animation for when the character is not moving
+		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72]);
+		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80); //walking animation for character using the OrcSpear sprite sheet
+
 		if(this.attacking){
 			if(!this.renderable.isCurrentAnimation("attack")){
 				this.renderable.setCurrentAnimation("attack", "idle"); //sets current animation to attack then reverts back to idle
@@ -135,11 +136,12 @@ game.PlayerEntity = me.Entity.extend ({
 
 	},
 
-	collideWithEnemyBase: function(){
+	collideWithEnemyBase: function(response){
 		if(response.b.type === 'EnemyBaseEntity'){ //if something runs into the Enemy base, it checks some things
 			var ydif = this.pos.y - response.b.pos.y; //the difference between the base's y and the player's y
 			var xdif = this.pos.x - response.b.pos.x; //the difference between the base's x and the player's x
 
+			console.log("differnce" + xdif + ydif);	
 
 			if(ydif<-40 && ydif>-50 && xdif<70 && xdif>-35){
 				this.body.falling = false;
@@ -160,7 +162,7 @@ game.PlayerEntity = me.Entity.extend ({
 		}		
 	},	
 
-	collideWithEnemyCreep: function(){
+	collideWithEnemyCreep: function(response){
 		var ydif = this.pos.y - response.b.pos.y; //the difference between the base's y and the player's y
 		var xdif = this.pos.x - response.b.pos.x; //the difference between the base's x and the player's x
 
