@@ -9,9 +9,16 @@ game.PlayerEntity = me.Entity.extend ({
 
 		this.addAnimation();
 
+
 		this.type = "PlayerEntity";
 		
+		this.attack = game.data.playerAttack;
+		this.renderable.addAnimation("idle", [78]); //animation for when the character is not moving
+		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72]);
+		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80); //walking animation for character using the OrcSpear sprite sheet
+
 		this.renderable.setCurrentAnimation("idle"); //sets the default animation to "idle"
+
 	},
 
 	setSuper:function(){
@@ -36,49 +43,18 @@ game.PlayerEntity = me.Entity.extend ({
 	setAttributes: function(){
 		this.health = game.data.playerHealth;
 		this.body.setVelocity(game.data.playerMoveSpeed, 14); //moves five units right
-		this.attack = game.data.playerAttack;
 	},
 
-	setFlags: function(){
-		this.dead = false;
-		this.facing ="right"; //keeps track of the direction of the character
-	},
-
-	addAnimation: function(){
-		this.renderable.addAnimation("idle", [78]); //animation for when the character is not moving
-		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72]);
-		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80); //walking animation for character using the OrcSpear sprite sheet
-	}
+	setFlags: function(){ this.dead = false; this.facing ="right";
+	//keeps track of the direction of the character },=
 
 	update: function(delta){
 		this.now = new Date().getTime(); //keeps track of the timer
 
-		if(this.health <=0){ //if the character's health is less than zero
-			this.dead = true; //the character is dead
-		}
+		this.dead.checkIfDead();
 
-		if(me.input.isKeyPressed("right")){ //checks if the right key is pressed
-			//adds to the position of the x by adding the velocity defined above in setVelocity() and multiplying
-			//it by me.timer.tick
-			//me.time.tick makes movement smooth
-			this.facing = "right";
-			this.body.vel.x += this.body.accel.x * me.timer.tick;
-			this.flipX(true);
-		}
-		else if(me.input.isKeyPressed("left")){
-			this.facing = "left";
-			this.body.vel.x -= this.body.accel.x * me.timer.tick;
-			this.flipX(false); //flips the animation so that when the character goes left, the animation goes the same way
-		}
-		else{
-			this.body.vel.x = 0;
-			
-		}
+		this.checkKeyPressesAndMove();
 
-		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){ //says that you can only jump if you're not already jumping or falling
-			this.body.jumping = true;
-			this.body.vel.y -= this.body.accel.y * me.timer.tick;
-		}
 
 		if(me.input.isKeyPressed("attack") && !this.body.jumping && !this.body.falling){
 			if(!this.renderable.isCurrentAnimation("attack")){
@@ -101,6 +77,47 @@ game.PlayerEntity = me.Entity.extend ({
 
 		this._super(me.Entity, "update", [delta]);
 		return true;
+	},
+
+	checkIfDead: function(){
+		if(this.health <=0){ //if the character's health is less than zero
+			return true; //the character is dead
+		}
+	},
+
+	checkKeyPressesAndMove: function(){
+		if(me.input.isKeyPressed("right")){ //checks if the right key is pressed
+			this.moveRight();
+		}
+		else if(me.input.isKeyPressed("left")){
+			this.moveLeft();
+		}
+		else{
+			this.body.vel.x = 0;
+		}
+		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){ //says that you can only jump if you're not already jumping or falling
+			this.jump();
+		}
+	},
+
+	moveRight: function(){
+		//adds to the position of the x by adding the velocity defined above in setVelocity() and multiplying
+		//it by me.timer.tick
+		//me.time.tick makes movement smooth
+		this.facing = "right";
+		this.body.vel.x += this.body.accel.x * me.timer.tick;
+		this.flipX(true);
+	},
+
+	moveLeft: function(){
+		this.facing = "left";
+		this.body.vel.x -= this.body.accel.x * me.timer.tick;
+		this.flipX(false); //flips the animation so that when the character goes left, the animation goes the same way
+	},
+
+	jump: function(){
+		this.body.jumping = true;
+		this.body.vel.y -= this.body.accel.y * me.timer.tick;
 	},
 
 	collideHandler: function(response){
@@ -160,4 +177,4 @@ game.PlayerEntity = me.Entity.extend ({
 	loseHealth: function(damage){
 		this.health = this.health - damage;
 	}
-});
+xa
