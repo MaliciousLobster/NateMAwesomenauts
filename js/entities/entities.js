@@ -141,9 +141,7 @@ game.PlayerEntity = me.Entity.extend ({
 			var ydif = this.pos.y - response.b.pos.y; //the difference between the base's y and the player's y
 			var xdif = this.pos.x - response.b.pos.x; //the difference between the base's x and the player's x
 
-			console.log("differnce" + xdif + ydif);	
-
-			if(ydif<-40 && ydif>-50 && xdif<70 && xdif>-35){
+			if(ydif<-30 && ydif>-40 && xdif<60 && xdif>-45){
 				this.body.falling = false;
 				this.body.vel.y = -1;
 			}
