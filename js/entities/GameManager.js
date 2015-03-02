@@ -22,7 +22,7 @@ game.GameTimerManager = Object.extend({
 			game.data.gold += 1;
 		}
 	},
-	
+
 	creepTimerCheck: function(){
 		if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
 			this.lastCreep = this.now;
@@ -42,5 +42,20 @@ game.HeroDeathManager = object.extend({
 			me.game.world.removeChild(game.data.player); //removes the player
 			me.state.current().resetPlayer(10, 0); //resets him
 		}
+		return true
+	}
+});
+
+game.ExperienceManager = object.extend({
+	init: function(x, y, settings){
+		this.alwaysUpdate = true; //always update the function
+	}
+	update: function(){
+		if(game.data.win === true){ //if win=true add 10 exp
+			game.data.exp += 10;
+		}else if(game.data.win === false){ //if win=false add 3 exp
+			game.data.exp += 3;
+		}
+		return true;
 	}
 });
