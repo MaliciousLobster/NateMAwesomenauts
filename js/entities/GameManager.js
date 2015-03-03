@@ -36,7 +36,7 @@ game.GameTimerManager = Object.extend({
 game.HeroDeathManager = object.extend({
 	init: function(x, y, settings){
 		this.alwaysUpdate = true;
-	}
+	},
 	update: function(){
 		if(game.data.player.dead){ //if the player is dead
 			me.game.world.removeChild(game.data.player); //removes the player
@@ -50,7 +50,7 @@ game.ExperienceManager = object.extend({
 	init: function(x, y, settings){
 		this.alwaysUpdate = true; //always update the function
 		this.gameOver = false;
-	}
+	},
 	update: function(){
 		if(game.data.win === true && !this.gameOver){ //if win=true add 10 exp
 			this.gameOver(true);
@@ -58,7 +58,7 @@ game.ExperienceManager = object.extend({
 			this.gameOver(false);
 		}
 		return true;
-	}
+	},
 	gameOver: function(win){
 		if(win){ //if win, add 10 exp
 			game.data.exp += 10;
