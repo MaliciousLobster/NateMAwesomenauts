@@ -52,6 +52,12 @@ game.TitleScreen = me.ScreenObject.extend({
 				return true;
 			},
 			newGame: function(){
+				game.data.exp = me.save.exp; //saves exp variable
+				game.data.exp1 = me.save.exp1;
+				game.data.exp2 = me.save.exp2;
+				game.data.exp3 = me.save.exp3;
+				game.data.exp4 = me.save.exp4;
+
 				me.input.releasePointerEvent('pointerdown', this);
 				me.state.change(me.state.PLAY); //changes state to PLAY
 			},
