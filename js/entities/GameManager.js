@@ -33,7 +33,7 @@ game.GameTimerManager = Object.extend({
 });
 
 
-game.HeroDeathManager = object.extend({
+game.HeroDeathManager = Object.extend({
 	init: function(x, y, settings){
 		this.alwaysUpdate = true;
 	},
@@ -42,11 +42,11 @@ game.HeroDeathManager = object.extend({
 			me.game.world.removeChild(game.data.player); //removes the player
 			me.state.current().resetPlayer(10, 0); //resets him
 		}
-		return true
+		return true;
 	}
 });
 
-game.ExperienceManager = object.extend({
+game.ExperienceManager = Object.extend({
 	init: function(x, y, settings){
 		this.alwaysUpdate = true; //always update the function
 		this.gameOver = false;
