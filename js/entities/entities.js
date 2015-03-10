@@ -202,7 +202,6 @@ game.PlayerEntity = me.Entity.extend ({
 		//if the creeps health is less than the attack, execute code
 		if(response.b.health <= game.data.playerAttack){				
 			//adds one gold for killing a creep
-			console.log("gold " + game.data.gold);	
 			game.data.gold += 1;
 		}
 		response.b.loseHealth(game.data.playerAttack);	

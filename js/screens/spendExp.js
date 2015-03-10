@@ -29,10 +29,10 @@ game.SpendExp = me.ScreenObject.extend({
 		})));
 		this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge){ //handles the inputs
 			if(action === "F1"){
-				if(game.data.exp >= exp1cost){
-					game.data.exp1 += 1;
-					game.data.exp -= exp1cost;
-					me.state.change(me.state.PLAY);
+				if(game.data.exp >= exp1cost){ //if you can afford F1
+					game.data.exp1 += 1; //add 1 to exp1
+					game.data.exp -= exp1cost; //subtract the cost from the total exp
+					me.state.change(me.state.PLAY); //change it to play
 				}else{
 					console.log("not enough EXP");
 				}
