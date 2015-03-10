@@ -10,6 +10,7 @@ game.SpendExp = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.F3, "F3");
 		me.input.bindKey(me.input.KEY.F4, "F4");
 		me.input.bindKey(me.input.KEY.ENTER, "ENTER");
+		var exp1cost = ((game.data.exp1 + 1)*10);
 
 		me.game.world.addChild(new (me.Renderable.extend({ //Starts a new game, resets all variables
 			init: function(){
@@ -20,7 +21,7 @@ game.SpendExp = me.ScreenObject.extend({
 			draw: function(renderer){
 				this.font.draw(renderer.getContext(), "PRESS 1-4 TO BUY, PRESS ENTER TO SKIP", this.pos.x, this.pos.y); //puts "Such Awesomenauts" at those coordinates
 				this.font.draw(renderer.getContext(), "CURRENT EXP: " + game.data.exp.toString(), this.pos.x , this.pos.y + 50); //puts "Such Awesomenauts" at those coordinates
-				this.font.draw(renderer.getContext(), "F1 - GAIN MORE GOLD - CURRENT LEVEL: " + game.data.exp1.toString() + " COST: " + ((game.data.exp1 + 1)*10) , this.pos.x , this.pos.y + 100); //puts "Such Awesomenauts" at those coordinates
+				this.font.draw(renderer.getContext(), "F1 - GAIN MORE GOLD - CURRENT LEVEL: " + game.data.exp1.toString() + " COST: " + exp1cost , this.pos.x , this.pos.y + 100); //puts "Such Awesomenauts" at those coordinates
 				this.font.draw(renderer.getContext(), "F2 - +DAMAGE " , this.pos.x , this.pos.y + 150); 
 				this.font.draw(renderer.getContext(), "F3 - +HEALTH ", this.pos.x , this.pos.y + 200); 
 				this.font.draw(renderer.getContext(), "F4 - +ATTACK SPEED ", this.pos.x , this.pos.y + 250); 
@@ -28,7 +29,13 @@ game.SpendExp = me.ScreenObject.extend({
 		})));
 		this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge){ //handles the inputs
 			if(action === "F1"){
-
+				if(game.data.exp >= exp1cost){
+					game.data.exp1 += 1;
+					game.data.exp -= exp1cost;
+					me.state.change(me.state.PLAY);
+				}else{
+					console.log("not enough EXP");
+				}
 			}else if(action === "F2"){
 
 			}else if(action === "F3"){
@@ -41,7 +48,6 @@ game.SpendExp = me.ScreenObject.extend({
 
 		});
 	},
-	
 	
 	/**	
 	 *  action to perform when leaving this screen (state change)
