@@ -132,7 +132,14 @@ game.SpendGold = Object.extend({
 			},
 
 			draw: function(renderer){
-				this.font.draw(renderer.getContext(), "PRESS F1-F6 TO BUY, PRESS B TO SKIP", this.pos.x, this.pos.y); //puts "Such Awesomenauts" at those coordinate
+				this.font.draw(renderer.getContext(), "PRESS F1-F6 TO BUY, PRESS B TO SKIP, CURRENT GOLD: " + game.data.gold, this.pos.x, this.pos.y); //puts "Such Awesomenauts" at those coordinate
+				this.font.draw(renderer.getContext(), "SKILL 1: INCREASE DAMAGE , CURRENT LEVEL: " + game.data.skill1 + " COST: " + ((game.data.skill1 + 1) * 10), this.pos.x, this.pos.y + 50);
+				this.font.draw(renderer.getContext(), "SKILL 2: INCREASE MOVEMENT SPEED , CURRENT LEVEL: " + game.data.skill2 + " COST: " + ((game.data.skill2 + 1) * 10), this.pos.x, this.pos.y + 100);
+				this.font.draw(renderer.getContext(), "SKILL 3: INCREASE HEALTH , CURRENT LEVEL: " + game.data.skill3 + " COST: " + ((game.data.skill3 + 1) * 10), this.pos.x, this.pos.y + 150);
+				this.font.draw(renderer.getContext(), "Q ABILITY: SPEED BURST , CURRENT LEVEL: " + game.data.ability1 + " COST: " + ((game.data.ability1 + 1) * 10), this.pos.x, this.pos.y + 200);
+				this.font.draw(renderer.getContext(), "W ABILITY: EAT CREEP , CURRENT LEVEL: " + game.data.ability2 + " COST: " + ((game.data.ability2 + 1) * 10), this.pos.x, this.pos.y + 250);
+				this.font.draw(renderer.getContext(), "E ABILITY: THROW SPEAR, CURRENT LEVEL: "  + game.data.ability3 + " COST: " + ((game.data.ability3 + 1) * 10), this.pos.x, this.pos.y + 300);
+
 			}
 		}));
 		me.game.world.addChild(game.data.buytext, 35);
