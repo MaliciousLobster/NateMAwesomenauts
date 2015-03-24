@@ -13,6 +13,8 @@ game.GameTimerManager = Object.extend({
 
 		this.creepTimerCheck();
 
+		this.playerCreepTimerCheck();
+
 	return true; 
 	},
 
@@ -28,6 +30,14 @@ game.GameTimerManager = Object.extend({
 		if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
 			this.lastCreep = this.now;
 			var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
+			me.game.world.addChild(creepe, 5);
+		}
+	},
+
+	playerCreepTimerCheck: function(){
+		if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
+			this.lastCreep = this.now;
+			var creepe = me.pool.pull("PlayerCreep", 1000, 0, {});
 			me.game.world.addChild(creepe, 5);
 		}
 	}
@@ -103,11 +113,41 @@ game.SpendGold = Object.extend({
 		game.data.buyscreen.setOpacity(0.85);
 		me.game.world.addChild(game.data.buyscreen, 34);//adds buy screen
 		game.data.player.body.setVelocity(0, 0); //makes player stop moving
+		me.input.bindKey(me.input.KEY.F1, "F1", true);
+		me.input.bindKey(me.input.KEY.F2, "F2", true);
+		me.input.bindKey(me.input.KEY.F3, "F3", true);
+		me.input.bindKey(me.input.KEY.F4, "F4", true);
+		me.input.bindKey(me.input.KEY.F5, "F5", true);
+		me.input.bindKey(me.input.KEY.F6, "F6", true);
+		this.setBuyText();
+
+	},
+	setBuyText: function(){
+		game.data.buytext = new (me.Renderable.extend({ //Starts a new game, resets all variables
+			init: function(){
+				this._super(me.Renderable, 'init',[game.data.pausePos.x, game.data.pausePos.y, 300, 50]);
+				this.font = new me.Font("Comic Sans MS", 26, "white"); //sets the font
+				this.updateWhenPaused = true;
+				this.alwaysUpdate = true;
+			},
+
+			draw: function(renderer){
+				this.font.draw(renderer.getContext(), "PRESS F1-F6 TO BUY, PRESS B TO SKIP", this.pos.x, this.pos.y); //puts "Such Awesomenauts" at those coordinate
+			}
+		}));
+		me.game.world.addChild(game.data.buytext, 35);
 	},
 	stopBuying: function(){
 		this.buying = false;
 		me.state.resume(me.state.PLAY);
 		game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20); //returns the player's movement
 		me.game.world.removeChild(game.data.buyscreen); //removes the buyscreen
+		me.input.unbindKey(me.input.KEY.F1, "F1", true);
+		me.input.unbindKey(me.input.KEY.F2, "F2", true);
+		me.input.unbindKey(me.input.KEY.F3, "F3", true);
+		me.input.unbindKey(me.input.KEY.F4, "F4", true);
+		me.input.unbindKey(me.input.KEY.F5, "F5", true);
+		me.input.unbindKey(me.input.KEY.F6, "F6", true);
+		me.game.world.removeChild(game.data.buytext);
 	}
 });
