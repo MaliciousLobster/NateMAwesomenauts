@@ -8,6 +8,8 @@ game.resources = [
 	{name: "title-screen", type:"image", src: "data/img/title.png"},
 	{name: "exp-screen", type:"image", src: "data/img/loadpic.png"},
 	{name: "gold-screen", type:"image", src: "data/img/spend.png"},
+	{name: "new-screen", type:"image", src: "data/img/newpic.png"},
+	{name: "old-screen", type:"image", src: "data/img/loadpic.png"},
 	
 	/* Graphics. 
 	 * @example
