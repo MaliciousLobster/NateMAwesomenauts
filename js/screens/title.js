@@ -25,12 +25,12 @@ game.TitleScreen = me.ScreenObject.extend({
 			newGame: function(){
 				me.input.releasePointerEvent('pointerdown', this);
 				this.removeVar();
-				me.state.change(me.state.PLAY); //changes state to PLAY
+				me.state.change(me.state.NEW); //changes state to PLAY
 			},
 			removeVar: function(){
 
 				
-				me.state.change(me.state.NEW);
+				me.state.change(me.state.LOAD);
 			}
 		})));
 
