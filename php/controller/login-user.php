@@ -22,13 +22,13 @@
 		if($row["password"] === crypt($password, $row["salt"])){ //checks the password if it was correct 
 			$_SESSION["authenticated"] = true; //creates a new session variable
 			$array["exp"] = $row["exp"]; //taking exp vars from the row (the answers from the query)
-			$array["exp"] = $row["exp"];
-			$array["exp"] = $row["exp"];
-			$array["exp"] = $row["exp"];
-			$array["exp"] = $row["exp"];
+			$array["exp1"] = $row["exp1"];
+			$array["exp2"] = $row["exp2"];
+			$array["exp3"] = $row["exp3"];
+			$array["exp4"] = $row["exp4"];
+			$_SESSION["name"] = $username;
 
-
-			echo "login successful";
+			echo json_encode($array); //echoing out the array as one statement
 		}
 		else {
 			echo "<p>Invalid username and password</p>";
