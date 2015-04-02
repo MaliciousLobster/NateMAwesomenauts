@@ -4,12 +4,12 @@
 	session_regenerate_id(true); //when a session is started, the session gets an id that stays with it the entire life of the session. 
 	                             //when this file is called upon it regenerates the id. Helps prevent against hackers.
 
-	$path = "/PHPproject/"; //stores direct path to the project
+	$path = "/NateMAwesomenauts/php/"; //stores direct path to the project
 	
 	$host = "localhost";
 	$username = "root";
 	$password = "root";
-	$database = "blog_db";
+	$database = "awesomenauts_db";
 
 	//verifies when the session variable "connection" doesn't have info in it
 	if(!isset($_SESSION["connection"])) {
