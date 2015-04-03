@@ -9,7 +9,6 @@ game.NewProfile = me.ScreenObject.extend({
 
 
 
-
 		me.input.unbindKey(me.input.KEY.B);
 		me.input.unbindKey(me.input.KEY.Q);
 		me.input.unbindKey(me.input.KEY.E);
