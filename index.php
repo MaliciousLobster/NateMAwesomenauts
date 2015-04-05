@@ -132,7 +132,6 @@
 			.success(function(response){
 				if(response==="Invalid username and password"){
 					alert(response);
-					
 				}else{
 					var data = jQuery.parseJSON(response); 
 					game.data.exp = data["exp"];
@@ -144,7 +143,7 @@
 					me.state.change(me.state.SPENDEXP);
 				}
 			})
-			.fail(function(respons){ //sends back message if it fails or succeeds
+			.fail(function(response){ //sends back message if it fails or succeeds
 				alert("Fail");
 			});
 		});
