@@ -10,7 +10,7 @@ game.EnemyCreep = me.Entity.extend({
 				return (new me.Rect(0,0,32,64)).toPolygon();
 			}
 		}]);
-		this.health = 1;
+		this.health = 7;
 		this.alwaysUpdate = true;
 		this.attacking = false;
 		this.lastAttacking = new Date().getTime();

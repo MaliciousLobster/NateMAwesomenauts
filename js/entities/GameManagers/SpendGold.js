@@ -17,7 +17,8 @@ game.SpendGold = Object.extend({
 			}
 		}
 		this.checkBuyKeys();
-
+		console.log("ability3: " + game.data.ability3);
+		console.log("player attack: " + game.data.playerAttack);
 		return true;
 	},
 	startBuying: function(){
@@ -153,7 +154,7 @@ game.SpendGold = Object.extend({
 			game.data.ability2 += 1;
 		}else if(skill===6){
 			game.data.gold -= ((game.data.ability3 + 1)*10);
-			game.data.ability3 += 1;
+			game.data.ability3 += game.data.ability3 + 1;
 		}
 
 	}
