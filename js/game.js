@@ -19,6 +19,7 @@ var game = {
 		// gameManager: "",
 		GameTimerManager: "",
 		HeroDeathManager: "",
+		spearTimer: 15,
 		player: "",
 		exp: 0,
 		gold: 0,
@@ -88,6 +89,7 @@ var game = {
 		me.pool.register("HeroDeathManager", game.HeroDeathManager);
 		me.pool.register("ExperienceManager", game.ExperienceManager);
 		me.pool.register("SpendGold", game.SpendGold);
+		me.pool.register("Spear", game.SpearThrow);
 
 
 		me.state.set(me.state.MENU, new game.TitleScreen());

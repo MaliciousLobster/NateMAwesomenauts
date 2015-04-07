@@ -19,7 +19,7 @@ game.SpendExp = me.ScreenObject.extend({
 			},
 
 			draw: function(renderer){
-				this.font.draw(renderer.getContext(), "PRESS 1-4 TO BUY, PRESS B TO SKIP", this.pos.x, this.pos.y); //puts "Such Awesomenauts" at those coordinates
+				this.font.draw(renderer.getContext(), "PRESS F1-F4 TO BUY, PRESS ENTER TO SKIP", this.pos.x, this.pos.y); //puts "Such Awesomenauts" at those coordinates
 				this.font.draw(renderer.getContext(), "CURRENT EXP: " + game.data.exp.toString(), this.pos.x , this.pos.y + 50); //puts "Such Awesomenauts" at those coordinates
 				this.font.draw(renderer.getContext(), "F1 - GAIN MORE GOLD - CURRENT LEVEL: " + game.data.exp1.toString() + " COST: " + exp1cost , this.pos.x , this.pos.y + 100); //puts "Such Awesomenauts" at those coordinates
 				this.font.draw(renderer.getContext(), "F2 - +DAMAGE " , this.pos.x , this.pos.y + 150); 
