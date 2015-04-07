@@ -38,7 +38,8 @@ var game = {
 		win: "",
 		PausePos: "",
 		buyscreen: "",
-		buytext: ""
+		buytext: "",
+		pausetext: ""
 
 
 	},
@@ -90,6 +91,7 @@ var game = {
 		me.pool.register("ExperienceManager", game.ExperienceManager);
 		me.pool.register("SpendGold", game.SpendGold);
 		me.pool.register("Spear", game.SpearThrow);
+		me.pool.register("PauseScreen", game.PauseScreen);
 
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
@@ -97,7 +99,7 @@ var game = {
 		me.state.set(me.state.SPENDEXP, new game.SpendExp());
 		me.state.set(me.state.NEW, new game.NewProfile());
 		me.state.set(me.state.LOAD, new game.LoadProfile());
-		me.state.set(me.state.PAUSE, new game.PauseScreen());
+
 		
 		
 

@@ -55,10 +55,12 @@
 		<script type="text/javascript" src="js/entities/GameManagers/GameManager.js"></script>
 		<script type="text/javascript" src="js/entities/GameManagers/GameTimerManager.js"></script>
 		<script type="text/javascript" src="js/entities/GameManagers/SpendGold.js"></script>
+		<script type="text/javascript" src="js/entities/GameManagers/PauseScreen.js"></script>
 		<script type="text/javascript" src="js/entities/GameManagers/HeroDeathManager.js"></script>
 		<script type="text/javascript" src="js/entities/EnemyCreep.js"></script>
 		<script type="text/javascript" src="js/entities/PlayerCreep.js"></script>
 		<script type="text/javascript" src="js/entities/entities.js"></script>
+		<script type="text/javascript" src="js/entities/spearThrow	.js"></script>
 		<script type="text/javascript" src="js/entities/HUD.js"></script>
 
 		<script type="text/javascript" src="js/screens/title.js"></script>
