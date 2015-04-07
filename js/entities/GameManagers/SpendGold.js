@@ -102,33 +102,33 @@ game.SpendGold = Object.extend({
 	},
 
 	checkCost: function(skill){
-		if(skill1===1 && (game.data.gold >= ((game.data.skill1 + 1) * 10))){ //if skill1 was selected and I have enough gold to level up skill1, return true
-
+		if(skill===1 && (game.data.gold >= ((game.data.skill1 + 1) * 10))){ //if skill1 was selected and I have enough gold to level up skill1, return true
+			return true;
+		}else{
+			return false;
+		}		
+		if(skill===2 && (game.data.gold >= ((game.data.skill2 + 1) * 10))){ //if skill2 was selected and I have enough gold to level up skill2, return true
+			return true;
 		}else{
 			return false;
 		}
-		if(skill2===2 && (game.data.gold >= ((game.data.skill2 + 1) * 10))){ //if skill2 was selected and I have enough gold to level up skill2, return true
-
+		if(skill===3 && (game.data.gold >= ((game.data.skill3 + 1) * 10))){ //if skill3 was selected and I have enough gold to level up skill3, return true
+			return true;
 		}else{
 			return false;
 		}
-		if(skill3===3 && (game.data.gold >= ((game.data.skill3 + 1) * 10))){ //if skill3 was selected and I have enough gold to level up skill3, return true
-
+		if(skill===4 && (game.data.gold >= ((game.data.ability1 + 1) * 10))){ //if skill4 was selected and I have enough gold to level up skill4, return true
+			return true;
 		}else{
 			return false;
 		}
-		if(skill4===4 && (game.data.gold >= ((game.data.ability1 + 1) * 10))){ //if skill4 was selected and I have enough gold to level up skill4, return true
-
+		if(skill===5 && (game.data.gold >= ((game.data.ability2 + 1) * 10))){ //if skill5 was selected and I have enough gold to level up skill5, return true
+			return true;
 		}else{
 			return false;
 		}
-		if(skill5===5 && (game.data.gold >= ((game.data.ability2 + 5) * 10))){ //if skill5 was selected and I have enough gold to level up skill5, return true
-
-		}else{
-			return false;
-		}
-		if(skill6===6 && (game.data.gold >= ((game.data.ability3 + 6) * 10))){ //if skill6 was selected and I have enough gold to level up skill6, return true
-
+		if(skill===6 && (game.data.gold >= ((game.data.ability3 + 1) * 10))){ //if skill6 was selected and I have enough gold to level up skill6, return true
+			return true;
 		}else{
 			return false;
 		}
@@ -139,21 +139,21 @@ game.SpendGold = Object.extend({
 			game.data.gold -= ((game.data.skill1 + 1)*10);
 			game.data.skill1 += 1;
 			game.data.playerAttack += 1;
-		}else if(skill2===2){
+		}else if(skill===2){
 			game.data.gold -= ((game.data.skill2 + 1)*10);
-			game.data.skill1 += 1;
-		}else if(skill3===3){
+			game.data.skill2 += 1;
+		}else if(skill===3){
 			game.data.gold -= ((game.data.skill3 + 1)*10);
-			game.data.skill1 += 1;
-		}else if(skill4===4){
+			game.data.skill3 += 1;
+		}else if(skill===4){
 			game.data.gold -= ((game.data.ability1 + 1)*10);
-			game.data.skill1 += 1;
-		}else if(skill5===5){
+			game.data.ability1 += 1;
+		}else if(skill===5){
 			game.data.gold -= ((game.data.ability2 + 1)*10);
-			game.data.skill1 += 1;
-		}else if(skill6===6){
+			game.data.ability2 += 1;
+		}else if(skill===6){
 			game.data.gold -= ((game.data.ability3 + 1)*10);
-			game.data.skill1 += 1;
+			game.data.ability3 += 1;
 		}
 
 	}

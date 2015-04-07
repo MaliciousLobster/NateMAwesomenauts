@@ -19,7 +19,7 @@ var game = {
 		// gameManager: "",
 		GameTimerManager: "",
 		HeroDeathManager: "",
-		spearTimer: 15,
+		spearTimer: 5000,
 		player: "",
 		exp: 0,
 		gold: 0,
@@ -97,6 +97,7 @@ var game = {
 		me.state.set(me.state.SPENDEXP, new game.SpendExp());
 		me.state.set(me.state.NEW, new game.NewProfile());
 		me.state.set(me.state.LOAD, new game.LoadProfile());
+		me.state.set(me.state.PAUSE, new game.PauseScreen());
 		
 		
 
