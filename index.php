@@ -123,31 +123,31 @@
 		});
 		$("#load").bind("click", function(){
 			me.state.change(me.state.SPENDEXP);
-			// $.ajax({
-			// 	type:"POST",
-			// 	url: "php/controller/login-user.php", //passes information into login-user.php
-			// 	data: { //looks at username id and looks at the value then calls Username
-			// 		username: $('#username').val(),
-			// 		password: $('#password').val() //does samething with password that it does with username
-			// 	},
-			// 	dataType: "text"
-			// })
-			// .success(function(response){
-			// 	if(response==="Invalid username and password"){
-			// 		alert(respone);
-			// 	}else{
-			// 		var data = jQuery.parseJSON(response);
-			// 		game.data.exp = data["exp"];
-			// 		game.data.exp1 = data["exp1"];
-			// 		game.data.exp2 = data["exp2"];
-			// 		game.data.exp3 = data["exp3"];
-			// 		game.data.exp4 = data["exp4"];
-			// 		me.state.change(me.state.SPENDEXP);
-			// 	}
-			// })
-			// .fail(function(response){ //sends back message if it fails or succeeds
-			// 	alert("Fail");
-			// });
+			 $.ajax({
+				type:"POST",
+			 	url: "php/controller/login-user.php", //passes information into login-user.php
+			 	data: { //looks at username id and looks at the value then calls Username
+			 		username: $('#username').val(),
+			 		password: $('#password').val() //does samething with password that it does with username
+			 	},
+			 	dataType: "text"
+			})
+			 .success(function(response){
+			 	if(response==="Invalid username and password"){
+			 		alert(response);
+			 	}else{
+			 		var data = jQuery.parseJSON(response);
+			 		game.data.exp = data["exp"];
+			 		game.data.exp1 = data["exp1"];
+			 		game.data.exp2 = data["exp2"];
+			 		game.data.exp3 = data["exp3"];
+			 		game.data.exp4 = data["exp4"];
+			 		me.state.change(me.state.SPENDEXP);
+				}
+			})
+				.fail(function(response){ //sends back message if it fails or succeeds
+				alert("Fail");
+			});
 		});
 		</script>
 	</body>

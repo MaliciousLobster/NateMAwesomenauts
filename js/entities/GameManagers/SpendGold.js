@@ -43,7 +43,7 @@ game.SpendGold = Object.extend({
 		game.data.buytext = new (me.Renderable.extend({ //Starts a new game, resets all variables
 			init: function(){
 				this._super(me.Renderable, 'init',[game.data.pausePos.x, game.data.pausePos.y, 300, 50]);
-				this.font = new me.Font("Comic Sans MS", 26, "white"); //sets the font
+				this.font = new me.Font("Arial", 26, "white"); //sets the font
 				this.updateWhenPaused = true;
 				this.alwaysUpdate = true;
 			},
@@ -53,9 +53,9 @@ game.SpendGold = Object.extend({
 				this.font.draw(renderer.getContext(), "SKILL 1: INCREASE DAMAGE , CURRENT LEVEL: " + game.data.skill1 + " COST: " + ((game.data.skill1 + 1) * 10), this.pos.x, this.pos.y + 50);
 				this.font.draw(renderer.getContext(), "SKILL 2: INCREASE MOVEMENT SPEED , CURRENT LEVEL: " + game.data.skill2 + " COST: " + ((game.data.skill2 + 1) * 10), this.pos.x, this.pos.y + 100);
 				this.font.draw(renderer.getContext(), "SKILL 3: INCREASE HEALTH , CURRENT LEVEL: " + game.data.skill3 + " COST: " + ((game.data.skill3 + 1) * 10), this.pos.x, this.pos.y + 150);
-				this.font.draw(renderer.getContext(), "Q ABILITY: SPEED BURST , CURRENT LEVEL: " + game.data.ability1 + " COST: " + ((game.data.ability1 + 1) * 10), this.pos.x, this.pos.y + 200);
-				this.font.draw(renderer.getContext(), "W ABILITY: EAT CREEP , CURRENT LEVEL: " + game.data.ability2 + " COST: " + ((game.data.ability2 + 1) * 10), this.pos.x, this.pos.y + 250);
-				this.font.draw(renderer.getContext(), "E ABILITY: THROW SPEAR, CURRENT LEVEL: "  + game.data.ability3 + " COST: " + ((game.data.ability3 + 1) * 10), this.pos.x, this.pos.y + 300);
+				this.font.draw(renderer.getContext(), "Q ABILITY1: SPEED BURST , CURRENT LEVEL: " + game.data.ability1 + " COST: " + ((game.data.ability1 + 1) * 10), this.pos.x, this.pos.y + 200);
+				this.font.draw(renderer.getContext(), "W ABILITY2: EAT CREEP , CURRENT LEVEL: " + game.data.ability2 + " COST: " + ((game.data.ability2 + 1) * 10), this.pos.x, this.pos.y + 250);
+				this.font.draw(renderer.getContext(), "E ABILITY3: THROW SPEAR, CURRENT LEVEL: "  + game.data.ability3 + " COST: " + ((game.data.ability3 + 1) * 10), this.pos.x, this.pos.y + 300);
 
 			}
 		}));
@@ -74,8 +74,8 @@ game.SpendGold = Object.extend({
 		me.input.unbindKey(me.input.KEY.F6, "F6", true);
 		me.game.world.removeChild(game.data.buytext);
 	},
-	checkBuyKeys: function(){
-		if(me.input.isKeyPressed("F1")){ //checking to see if you have enough to buy something
+	checkBuyKeys: function(){ //checks if you have the appropriate amount then makes the transaction
+		if(me.input.isKeyPressed("F1")){
 			if(this.checkCost(1)){
 				this.makePurchase(1);
 			}
@@ -154,7 +154,7 @@ game.SpendGold = Object.extend({
 			game.data.ability2 += 1;
 		}else if(skill===6){
 			game.data.gold -= ((game.data.ability3 + 1)*10);
-			game.data.ability3 += game.data.ability3 + 1;
+			game.data.ability3 += 1;
 		}
 
 	}
