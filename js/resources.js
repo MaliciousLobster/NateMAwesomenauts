@@ -11,6 +11,7 @@ game.resources = [
 	{name: "new-screen", type:"image", src: "data/img/newpic.png"},
 	{name: "load-screen", type:"image", src: "data/img/loadpic.png"},
 	{name: "spear", type:"image", src: "data/img/spear.png"},
+	{name: "minimap", type:"image", src: "data/img/minimap.png"},
 	
 	/* Graphics. 
 	 * @example
