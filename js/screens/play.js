@@ -8,7 +8,7 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		me.levelDirector.loadLevel("level01"); //loads the map
 
-		this.resetPlayer(50, 2500);
+		this.resetPlayer(10, 50, 2500);
  
 		var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
 		me.game.world.addChild(gameTimerManager, 0);
