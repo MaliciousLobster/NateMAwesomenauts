@@ -29,7 +29,7 @@ game.GameTimerManager = Object.extend({
 	creepTimerCheck: function(){
 		if(Math.round(this.now/500)%10 ===0 && (this.now - this.lastCreep >= 500)){
 			this.lastCreep = this.now;
-			var creepe = me.pool.pull("EnemyCreep", 13000, 5700, {});
+			var creepe = me.pool.pull("EnemyCreep", 13000, 2500, {});
 			me.game.world.addChild(creepe, 5);
 		}
 	},
@@ -37,7 +37,7 @@ game.GameTimerManager = Object.extend({
 	playerCreepTimerCheck: function(){
 		if(Math.round(this.now/500)%10 ===0 && (this.now - this.lastCreep2 >= 500)){
 			this.lastCreep2 = this.now;
-			var creepp = me.pool.pull("PlayerCreep", 0, 5700, {});
+			var creepp = me.pool.pull("PlayerCreep", 0, 2500, {});
 			me.game.world.addChild(creepp, 5);
 		}
 	}

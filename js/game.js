@@ -5,6 +5,7 @@ var game = {
 	// an object where to store game information
 	data : {
 		// score
+		minimap: "",
 		score: 0,
 		enemyBaseHealth: 10,
 		playerBaseHealth: 10,
@@ -42,7 +43,8 @@ var game = {
 		buyscreen: "",
 		buytext: "",
 		pausetext: "",
-		minimap: "",
+		miniPlayer: "",
+		
 
 
 	},
@@ -96,6 +98,7 @@ var game = {
 		me.pool.register("spear", game.SpearThrow, true);
 		me.pool.register("PauseScreen", game.PauseScreen);
 		me.pool.register("minimap", game.MiniMap, true);
+		me.pool.register("miniplayer", game.MiniPlayerLocation, true);
 
 
 		me.state.set(me.state.MENU, new game.TitleScreen());

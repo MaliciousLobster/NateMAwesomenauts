@@ -8,7 +8,7 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		me.levelDirector.loadLevel("level01"); //loads the map
 
-		this.resetPlayer(50, 5700);
+		this.resetPlayer(50, 2500);
  
 		var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
 		me.game.world.addChild(gameTimerManager, 0);
@@ -25,8 +25,8 @@ game.PlayScreen = me.ScreenObject.extend({
 		var pauseScreen = me.pool.pull("PauseScreen", 0, 0, {});
 		me.game.world.addChild(pauseScreen, 0);
 
-		var minimap = me.pool.pull("minimap", 10, 10, {});
-		me.game.world.addChild(minimap, 30);
+		game.data.minimap = me.pool.pull("MiniMap", 10, 10, {});
+		me.game.world.addChild(game.data.minimap, 30);	
 
 		me.input.bindKey(me.input.KEY.F9, "pause");
 		me.input.bindKey(me.input.KEY.B, "buy");
@@ -57,6 +57,8 @@ game.PlayScreen = me.ScreenObject.extend({
 	resetPlayer: function(x, y){
 		game.data.player = me.pool.pull("player", x, y, {});//loads the player by pulling on an instance of it
 		me.game.world.addChild(game.data.player, 5); //5 is the layer number
+		game.data.miniPlayer = me.pool.pull("miniplayer", 10, 10, {});
+		me.game.world.addChild(game.data.miniPlayer, 31);
 	}
 
 });
