@@ -47,23 +47,23 @@ game.PlayerCreep = me.Entity.extend({
 			this.attacking = true;
 			// this.lastAttacking = this.now;
 			this.body.vel.x = 0;
-			this.pos.x = this.pos.x + 1;
+			this.pos.x = this.pos.x - 1;
 			if((this.now-this.lastHit >= game.data.creepAttackTimer)) {
 				this.lastHit = this.now;
-				response.b.loseHealth(game.data.enemyCreepAttack);
+				response.b.loseHealth(game.data.playerCreepAttack);
 			}
 		}else if(response.b.type=== 'EnemyCreep'){
 			var xdif = this.pos.x - response.b.pos.x;
 			this.attacking = true;
 			// this.lastAttacking = this.now;
 			
-			if(xdif>0){ //checks to see if the creep hits anything
-				this.pos.x = this.pos.x + 1;  //moves creep one to the right
+			if(xdif<0){ //checks to see if the creep hits anything
+				this.pos.x = this.pos.x - 1;  //moves creep one to the right
 				this.body.vel.x = 0; //stops movement
 			}
-			if((this.now-this.lastHit >= game.data.creepAttackTimer) && xdif>0) {
+			if((this.now-this.lastHit >= game.data.creepAttackTimer) && xdif<0) {
 				this.lastHit = this.now;
-				response.b.loseHealth(game.data.enemyCreepAttack);
+				response.b.loseHealth(game.data.playerCreepAttack);
 			}
 		};
 	}

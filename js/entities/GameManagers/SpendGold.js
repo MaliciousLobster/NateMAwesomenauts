@@ -142,9 +142,11 @@ game.SpendGold = Object.extend({
 		}else if(skill===2){
 			game.data.gold -= ((game.data.skill2 + 1)*10);
 			game.data.skill2 += 1;
+			game.data.playerMoveSpeed += 1;
 		}else if(skill===3){
 			game.data.gold -= ((game.data.skill3 + 1)*10);
 			game.data.skill3 += 1;
+			game.data.playerHealth += 2;
 		}else if(skill===4){
 			game.data.gold -= ((game.data.ability1 + 1)*10);
 			game.data.ability1 += 1;

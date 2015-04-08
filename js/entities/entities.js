@@ -182,15 +182,16 @@ game.PlayerEntity = me.Entity.extend ({
 	},	
 
 	collideWithEnemyCreep: function(response){
-		var ydif = this.pos.y - response.b.pos.y; //the difference between the base's y and the player's y
-		var xdif = this.pos.x - response.b.pos.x; //the difference between the base's x and the player's x
+		if(response.b.type === "EnemyCreep"){
+			var ydif = this.pos.y - response.b.pos.y; //the difference between the base's y and the player's y
+			var xdif = this.pos.x - response.b.pos.x; //the difference between the base's x and the player's x
 
-		this.stopMovement(xdif);
+			this.stopMovement(xdif);	
 
-		if(this.checkAttack(xdif, ydif)){
-			this.hitCreep(response);
-		};
-
+			if(this.checkAttack(xdif, ydif)){
+				this.hitCreep(response);
+			};
+		}	
 		
 	},
 

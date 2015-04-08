@@ -63,7 +63,18 @@ game.EnemyCreep = me.Entity.extend({
 				this.lastHit = this.now;
 				response.b.loseHealth(game.data.enemyCreepAttack);
 			}
-		};
+		}else if(response.b.type==='PlayerCreep'){
+			var xdif = this.pos.x + response.b.pos.x;
+			this.attacking = true;
+			if(xdif>0){
+				this.pos.x = this.pos.x + 1;
+				this.body.vel.x = 0;
+			}
+			if((this.now-this.lastHit >= game.data.creepAttackTimer) && xdif>0){
+				this.lastHit = this.now;
+				response.b.loseHealth(game.data.enemyCreepAttack);
+			}
+		}
 	}
 });
 // game.EnemyCreep = me.Entity.extend({
