@@ -10,13 +10,13 @@ game.PlayerCreep = me.Entity.extend({
 				return (new me.Rect(0,0,100,85)).toPolygon();
 			}
 		}]);
-		this.health = 5;
+		this.health = 7;
 		this.alwaysUpdate = true;
 		this.attacking = false;
 		this.lastAttacking = new Date().getTime();
 		this.lastHit = new Date().getTime();
 		this.now = new Date().getTime();
-		this.body.setVelocity(5,20);
+		this.body.setVelocity(game.data.creepMoveSpeed,20);
 		this.type = "PlayerCreep";
 		this.renderable.addAnimation("walk", [0,1,2,3,4], 80);
 		this.renderable.setCurrentAnimation("walk");
@@ -33,6 +33,8 @@ game.PlayerCreep = me.Entity.extend({
 
 		this.body.vel.x += this.body.accel.x * me.timer.tick;
 
+		this.flipX(true);
+
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
 
 		this.body.update(delta);
@@ -41,27 +43,27 @@ game.PlayerCreep = me.Entity.extend({
 		return true;
 	}, 
 	collideHandler: function (response){
-		if (response.b.type ==='EnemyBase') {
+		if (response.b.type ==='EnemyBaseEntity') {
 			this.attacking = true;
 			// this.lastAttacking = this.now;
 			this.body.vel.x = 0;
-			this.pos.x = this.pos.x - 1;
-			if((this.now-this.lastHit >= 1000)) {
+			this.pos.x = this.pos.x + 1;
+			if((this.now-this.lastHit >= game.data.creepAttackTimer)) {
 				this.lastHit = this.now;
-				response.b.loseHealth(1);
+				response.b.loseHealth(game.data.enemyCreepAttack);
 			}
 		}else if(response.b.type=== 'EnemyCreep'){
 			var xdif = this.pos.x - response.b.pos.x;
 			this.attacking = true;
 			// this.lastAttacking = this.now;
 			
-			if(xdif<0){ //checks to see if the creep hits anything
-				this.pos.x = this.pos.x - 1;  //moves creep one to the right
+			if(xdif>0){ //checks to see if the creep hits anything
+				this.pos.x = this.pos.x + 1;  //moves creep one to the right
 				this.body.vel.x = 0; //stops movement
 			}
 			if((this.now-this.lastHit >= game.data.creepAttackTimer) && xdif>0) {
 				this.lastHit = this.now;
-				response.b.loseHealth(1);
+				response.b.loseHealth(game.data.enemyCreepAttack);
 			}
 		};
 	}

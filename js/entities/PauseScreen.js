@@ -1,4 +1,4 @@
-game.PauseScree = Object.extend({
+game.PauseScreen = Object.extend({
 	init: function(x, y, settings){
 		this.now = new Date().getTime();//a timer
 		this.lastPause = new Date().getTime(); //keeps track of the last time a creep happened

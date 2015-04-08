@@ -17,8 +17,7 @@ game.SpendGold = Object.extend({
 			}
 		}
 		this.checkBuyKeys();
-		console.log("ability3: " + game.data.ability3);
-		console.log("player attack: " + game.data.playerAttack);
+
 		return true;
 	},
 	startBuying: function(){

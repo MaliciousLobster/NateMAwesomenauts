@@ -16,11 +16,12 @@ var game = {
 		creepAttackTimer: 1000,
 		playerMoveSpeed: 5,
 		creepMoveSpeed: 3,
-		// gameManager: "",
+		gameManager: "",
 		GameTimerManager: "",
 		HeroDeathManager: "",
 		spearTimer: 6000,
 		player: "",
+		playerCreep: "",
 		exp: 0,
 		gold: 0,
 		exp1: 0,
@@ -85,7 +86,7 @@ var game = {
 		me.pool.register("PlayerBase", game.PlayerBaseEntity);
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
-		me.pool.register("PayerCreep", game.PlayerCreep, true);
+		me.pool.register("PlayerCreep", game.PlayerCreep, true);
 		me.pool.register("GameTimerManager", game.GameTimerManager);
 		me.pool.register("HeroDeathManager", game.HeroDeathManager);
 		me.pool.register("ExperienceManager", game.ExperienceManager);
