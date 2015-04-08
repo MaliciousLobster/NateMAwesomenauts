@@ -25,7 +25,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		var pauseScreen = me.pool.pull("PauseScreen", 0, 0, {});
 		me.game.world.addChild(pauseScreen, 0);
 
-		game.data.minimap = me.pool.pull("minimap", 10, 10, {});
+		var minimap = me.pool.pull("minimap", 10, 10, {});
 		me.game.world.addChild(minimap, 30);
 
 		me.input.bindKey(me.input.KEY.F9, "pause");
