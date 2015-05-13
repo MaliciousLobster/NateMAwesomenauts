@@ -125,7 +125,7 @@
 			});
 		});
 		$("#load").bind("click", function(){
-			me.state.change(me.state.SPENDEXP);
+			//me.state.change(me.state.SPENDEXP);
 			 $.ajax({
 				type:"POST",
 			 	url: "php/controller/login-user.php", //passes information into login-user.php
@@ -139,6 +139,7 @@
 			 	if(response==="Invalid username and password"){
 			 		alert(response);
 			 	}else{
+			 		alert(response);
 			 		var data = jQuery.parseJSON(response);
 			 		game.data.exp = data["exp"];
 			 		game.data.exp1 = data["exp1"];
